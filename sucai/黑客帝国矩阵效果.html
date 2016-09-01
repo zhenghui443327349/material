@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+			<!--图形容器，用来绘制图形-->
+		<canvas id="Painting"></canvas>
+		<audio src="群星 - Leave You Far Behind.mp3" autoplay="autoplay" type="audio/mp3" ></audio>
+		<script type="text/javascript">
+			var w = window.screen;
+			var width =  Painting.width = w.width;
+			var height =  Painting.height = w.height;
+			var text = Array(256).join(2).split('');
+			var draw = function() {
+				//getContext（）返回画布上绘制的类型，2d指的是二维绘图        fillStyle设置或返回用于填充绘画的颜色、渐变或模式          rgba（红，绿，蓝，透明度）（C3属性）； 
+				Painting.getContext('2d').fillStyle = 'rgba(0,0,0,.05)';
+				//fillRect（）绘制“已填色”的矩形，参数矩形左上角的x的坐标   矩形左上角的y的坐标     矩形宽度和高度
+				Painting.getContext('2d').fillRect(0, 0, width, height);
+				Painting.getContext('2d').fillStyle = '#0F0';
+				//map事件属性
+				text.map(function(y_pos, index) {
+					content = String.fromCharCode(46 + Math.random() *42);
+					x_pos = index * 12;
+					//fillText（）在画布上绘制填色的文本     参数规定在画布上出现的文本；开始绘制文本的 x 坐标位置（相对于画布）；开始绘制文本的 y坐标位置（相对于画布）；maxWidth允许的最大文本宽度
+					Painting.getContext('2d').fillText(content, x_pos, y_pos);
+					text[index] = (y_pos > 800 + Math.random() * 1e4) ? 0 : y_pos + 12;
+				});
+			};
+			setInterval(draw, 30);
+		</script>
+
+	</body>
+
+</html>
